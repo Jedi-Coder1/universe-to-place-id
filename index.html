@@ -17,7 +17,9 @@
 
   <script>
     async function Request(id) {
-      const post = await fetch(`https://apis.roblox.com/universes/v1/places/${id}/universe`).then((res) => res.json());
+      const url = `https://apis.roblox.com/universes/v1/places/${id}/universe`
+      const post = await fetch(url).then((res) => res.json());
+      if (!post.universeId) {alert('Error')}
 
       alert(`Your Universal Id Is ${post.universeId}`);
       
@@ -31,8 +33,8 @@ document.getElementById('btn').addEventListener('click', () => {
 		alert('Enter Valid Place Id');}
   else {
     if (!isNaN(str) && !isNaN(parseFloat(str))) {
-      Request(str)
-}   else {
+      Request(str)}
+    else {
       alert('Enter Valid Place Id');
 }}});
   </script>
