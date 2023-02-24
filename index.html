@@ -17,14 +17,17 @@
 
   <script>
     async function Request(id) {
-      await fetch(`https://apis.roblox.com/universes/v1/places/${id}/universe`, { 
+      let URL = `https://apis.roblox.com/universes/v1/places/${id}/universe`
+      
+      await fetch(URL, {
   method: 'GET'
 }).then(function(response) { return response.text();})
-        .then(function(text) {
-          document.getElementById("Univer").innerHTML = text;
-          navigator.clipboard.writeText(text);
+        .then(function(obj) {
+          let data = JSON.parse(obj)
+          document.getElementById("Univer").innerHTML = data.universeId;
+          navigator.clipboard.writeText(data.universeId);
   
-          alert(`Your Universal Id Is ${text}`);
+          alert(`Your Universal Id Is ${data.universeId}`);
 });
     }
     
