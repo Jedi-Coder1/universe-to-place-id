@@ -20,7 +20,40 @@
 
   
 
-  <script src='script.js'></script>
+  <script>
+let Btn = document.getElementById('btn');
+let Form = document.getElementById('Pid');
+let IdShower = document.getElementById('Univer');
+
+
+
+
+
+
+Btn.addEventListener('click', () => {
+	let str = Form.value
+	if (!str) {
+		alert('Enter Valid Place Id');}
+  else {
+    if (!isNaN(str) && !isNaN(parseFloat(str))) {
+		  const data = Request(str).title
+      IdShower.innerHTML = data;
+      navigator.clipboard.writeText(data);
+}   else {
+      alert('Enter Valid Place Id');
+
+}}});
+
+
+function Request(id) {
+  var url = `https://apis.roblox.com/universes/v1/places/${id}/universe`
+  
+  let xmlHttpReq = new XMLHttpRequest();
+  xmlHttpReq.open("GET", url, false);
+  xmlHttpReq.send(null);
+  return xmlHttpReq.responseText;
+};
+  </script>
 </body>
 
 </html>
