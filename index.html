@@ -17,17 +17,16 @@
 
   <script>
     async function Request(id) {
-      const post = await fetch("https://jsonplaceholder.typicode.com/posts/1").then((res) => res.json());
-      let data = post.title
-      alert(`Your Universal Id Is ${data}`);
-        
-        document.getElementById("Univer").innerHTML = data;
-        navigator.clipboard.writeText(data);
+      const post = await fetch(`https://apis.roblox.com/universes/v1/places/${id}/universe`).then((res) => res.json());
+
+      alert(`Your Universal Id Is ${post.universeId}`);
+      
+      document.getElementById("Univer").innerHTML = post.universeId;
+      navigator.clipboard.writeText(post.universeId);
     }
     
 document.getElementById('btn').addEventListener('click', () => {
 	let str = document.getElementById('Pid').value
-  let url = `https://apis.roblox.com/universes/v1/places/${str}/universe`
 	if (!str) {
 		alert('Enter Valid Place Id');}
   else {
