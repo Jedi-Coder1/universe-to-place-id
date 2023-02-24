@@ -1,5 +1,5 @@
 const firstBit = 'https://apis.roblox.com/universes/v1/places/'
-    const lastBit = '/universe'
+const lastBit = '/universe'
 
     function get(id) {
       let url = firstBit.concat(id, lastBit);
