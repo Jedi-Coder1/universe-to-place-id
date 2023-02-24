@@ -3,14 +3,8 @@ const lastBit = '/universe'
 
 function get(id) {
   let url = firstBit.concat(id, lastBit);
-  fetch(url, {
-        method: "GET",
-}).then(response => {
-  if (!response.ok) {
-    alert(`Error ${response.statusText}`);
-  } else {return response.text()};
-})
-    }
+  
+}
 
     
 document.getElementById('btn').addEventListener('click', () => {
