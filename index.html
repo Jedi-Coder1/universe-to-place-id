@@ -15,16 +15,9 @@
 
   <label id = 'Univer'>Here</label>
 
-
-
-
-  
-
   <script>
-let Form = document.getElementById('Pid');
-
 document.getElementById('btn').addEventListener('click', () => {
-	let str = Form.value
+	let str = document.getElementById('Pid').value
   let url = `https://apis.roblox.com/universes/v1/places/${str}/universe`
 	if (!str) {
 		alert('Enter Valid Place Id');}
@@ -37,8 +30,6 @@ document.getElementById('btn').addEventListener('click', () => {
         
           document.getElementById("Univer").innerHTML = xhr.responseText;
           navigator.clipboard.writeText(xhr.responseText);
-    }  else {
-        alert(`Error`)
       }
     }
       xhr.open('GET', url, true);
