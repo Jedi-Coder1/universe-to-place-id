@@ -18,21 +18,18 @@
   <script>
     const firstBit = 'https://apis.roblox.com/universes/v1/places/'
     const lastBit = '/universe'
-
+    
+    function showData(theData) {
+      document.getElementById("Univer").innerHTML = theData;
+      navigator.clipboard.writeText(theData);
+  
+      alert(`Your Universal Id Is ${theData}`)};
+    
+    
     function get(id) {
       var url = firstBit.concat(id, lastBit);
 
-      const xhttp = new XMLHttpRequest();
-      xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-          document.getElementById("Univer").innerHTML = this.responseText;
-          navigator.clipboard.writeText(this.responseText);
-  
-          alert(`Your Universal Id Is ${this.responseText}`);
-    }
-  };
-  xhttp.open("GET", url);
-  xhttp.send(); 
+      
     }
 
     
