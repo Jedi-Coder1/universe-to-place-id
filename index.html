@@ -18,30 +18,31 @@
   <script>
     const firstBit = 'https://apis.roblox.com/universes/v1/places/'
     const lastBit = '/universe'
-    
-    async function Request(id) {
-      let URL = firstBit.concat(id, lastBit);
 
-      await fetch(URL, {
-  method: 'GET'
-}).then(function(response) { return response.text();})
-        .then(function(obj) {
-          document.getElementById("Univer").innerHTML = obj;
-          navigator.clipboard.writeText(obj);
+    function get(id) {
+      let url = firstBit.concat(id, lastBit);
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+     var data = JSON.parse(this.responseText);
+      document.getElementById("Univer").innerHTML = data;
+      navigator.clipboard.writeText(data);
   
-          alert(`Your Universal Id Is ${obj}`);
-});
+      alert(`Your Universal Id Is ${data}`);
+    }
+  };
+  xhttp.open("GET", url, true);
+  xhttp.send();
     }
     
-document.getElementById('btn').addEventListener('click', () => {
-	let str = document.getElementById('Pid').value
-	if (!str) {
-		alert('Enter Valid Place Id');}
-  else {
-    if (!isNaN(str) && !isNaN(parseFloat(str))) {
-      Request(str)
-}   else {
-      alert('Enter Valid Place Id');
+    document.getElementById('btn').addEventListener('click', () => {
+      let str = document.getElementById('Pid').value
+        if (!str) {alert('Enter Valid Place Id');}
+        else {
+          if (!isNaN(str) && !isNaN(parseFloat(str))) {
+            get(str)
+          }else {
+            alert('Enter Valid Place Id');
 }}});
   </script>
 </body>
