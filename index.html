@@ -18,13 +18,17 @@
   <script>
     async function Request(id) {
       const url = `https://apis.roblox.com/universes/v1/places/${id}/universe`
-      const post = await fetch(url).then((res) => res.json());
-      if (!post.universeId) {alert('Error')}
 
-      alert(`Your Universal Id Is ${post.universeId}`);
-      
-      document.getElementById("Univer").innerHTML = post.universeId;
-      navigator.clipboard.writeText(post.universeId);
+      await fetch('https://jsonplaceholder.typicode.com/posts/1', { 
+  method: 'GET'
+})
+.then(function(response) { return response.json(); })
+.then(function(json) {
+  document.getElementById("Univer").innerHTML = json;
+  navigator.clipboard.writeText(json);
+  
+  alert(`Your Universal Id Is ${json}`);
+});
     }
     
 document.getElementById('btn').addEventListener('click', () => {
@@ -33,8 +37,8 @@ document.getElementById('btn').addEventListener('click', () => {
 		alert('Enter Valid Place Id');}
   else {
     if (!isNaN(str) && !isNaN(parseFloat(str))) {
-      Request(str)}
-    else {
+      Request(str)
+}   else {
       alert('Enter Valid Place Id');
 }}});
   </script>
