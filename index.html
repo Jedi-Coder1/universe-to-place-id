@@ -16,18 +16,20 @@
   <label id = 'Univer'>Here</label>
 
   <script>
+    const firstBit = 'https://apis.roblox.com/universes/v1/places/'
+    const lastBit = '/universe'
+    
     async function Request(id) {
-      let URL = `https://apis.roblox.com/universes/v1/places/${id}/universe`
-      
+      let URL = firstBit.concat(id, lastBit);
+
       await fetch(URL, {
   method: 'GET'
 }).then(function(response) { return response.text();})
         .then(function(obj) {
-          let data = JSON.parse(obj)
-          document.getElementById("Univer").innerHTML = data.universeId;
-          navigator.clipboard.writeText(data.universeId);
+          document.getElementById("Univer").innerHTML = obj;
+          navigator.clipboard.writeText(obj);
   
-          alert(`Your Universal Id Is ${data.universeId}`);
+          alert(`Your Universal Id Is ${obj}`);
 });
     }
     
