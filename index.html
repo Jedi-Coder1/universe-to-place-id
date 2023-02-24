@@ -21,38 +21,31 @@
   
 
   <script>
-let Btn = document.getElementById('btn');
 let Form = document.getElementById('Pid');
-let IdShower = document.getElementById('Univer');
 
-
-
-
-
-
-Btn.addEventListener('click', () => {
+document.getElementById('btn').addEventListener('click', () => {
 	let str = Form.value
+  let url = `https://apis.roblox.com/universes/v1/places/${str}/universe`
 	if (!str) {
 		alert('Enter Valid Place Id');}
   else {
     if (!isNaN(str) && !isNaN(parseFloat(str))) {
-		  const data = Request(str).title
-      IdShower.innerHTML = data;
-      navigator.clipboard.writeText(data);
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {
+      if (xhr.readyState == XMLHttpRequest.DONE) {
+          alert(`Your Universal Id Is ${xhr.responseText}`)
+        
+          document.getElementById("Univer").innerHTML = xhr.responseText;
+          navigator.clipboard.writeText(xhr.responseText);
+    }  else {
+        alert(`Error`)
+      }
+    }
+      xhr.open('GET', url, true);
+      xhr.send(null);
 }   else {
       alert('Enter Valid Place Id');
-
 }}});
-
-
-function Request(id) {
-  var url = `https://apis.roblox.com/universes/v1/places/${id}/universe`
-  
-  let xmlHttpReq = new XMLHttpRequest();
-  xmlHttpReq.open("GET", url, false);
-  xmlHttpReq.send(null);
-  return xmlHttpReq.responseText;
-};
   </script>
 </body>
 
