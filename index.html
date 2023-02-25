@@ -16,23 +16,28 @@
   <label id = 'Univer'>Here</label>
 
   <script>
-    const firstBit = 'https://apis.roblox.com/universes/v1/places/'
+    const firstBit = 'https://apis.roproxy.com/universes/v1/places/'
     const lastBit = '/universe'
     
     function showData(theData) {
       document.getElementById("Univer").innerHTML = theData;
       navigator.clipboard.writeText(theData);
-  
       alert(`Your Universal Id Is ${theData}`)};
     
     
     function get(id) {
       var url = firstBit.concat(id, lastBit);
 
-      
-    }
+      var req = new XMLHttpRequest();
+      req.overrideMimeType("application/json");
+      req.open('GET', url, true);
+      req.onload  = function() {
+        var jsonResponse = JSON.parse(req.responseText);
+        showData(jsonResponse.universeId)
+};
+    req.send(null);
+    };
 
-    
     document.getElementById('btn').addEventListener('click', () => {
       let str = document.getElementById('Pid').value
         if (!str) {alert('Enter Valid Place Id');}
