@@ -20,11 +20,13 @@
     const lastBit = '/universe'
     
     function showData(theData) {
-      document.getElementById("Univer").innerHTML = theData;
-      navigator.clipboard.writeText(theData);
-      alert(`Your Universal Id Is ${theData}`)};
-    
-    
+      if (!isNaN(theData) && !isNaN(parseFloat(theData))) {
+        document.getElementById("Univer").innerHTML = theData;
+        navigator.clipboard.writeText(theData);
+        alert(`Your Universal Id Is ${theData}`);
+    } else {
+        alert('Not A Valid Place Id')}};
+
     function get(id) {
       var url = firstBit.concat(id, lastBit);
 
@@ -33,7 +35,11 @@
       req.open('GET', url, true);
       req.onload  = function() {
         var jsonResponse = JSON.parse(req.responseText);
-        showData(jsonResponse.universeId)
+        try {showData(jsonResponse.universeId)}
+        catch(err) {
+          alert(err.message)
+}
+        
 };
     req.send(null);
     };
