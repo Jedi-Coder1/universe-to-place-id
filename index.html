@@ -29,11 +29,9 @@
         alert('Not A Valid Place Id')}};
 
     function get(id) {
-      var url = firstBit.concat(id, lastBit);
-
-      var req = new XMLHttpRequest();
+	  var req = new XMLHttpRequest();
       req.overrideMimeType("application/json");
-      req.open('GET', url, true);
+      req.open('GET', firstBit.concat(id, lastBit), true);
       req.onload  = function() {
         var jsonResponse = JSON.parse(req.responseText);
         try {showData(jsonResponse.universeId)}
